@@ -15,7 +15,7 @@ const RecipeDetails = () => {
     loadDetails();
   }, [id]);
 
-  if (!recipe) return <div className="p-10">Loading...</div>;
+  if (!recipe)  return <div className="p-10">Loading...</div>;
 
   return (
     <motion.div
