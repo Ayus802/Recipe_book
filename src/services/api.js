@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-console.log("API Key:", API_KEY); // Debugging line to check if the API key is loaded
+
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
 export const fetchRecipes = async (query = "") => {
@@ -9,7 +9,7 @@ export const fetchRecipes = async (query = "") => {
     return axios.get(`${BASE_URL}/random`, {
       params: {
         apiKey: API_KEY,
-        number: 12,
+        number: 24,
       },
     });
   }
@@ -18,7 +18,7 @@ export const fetchRecipes = async (query = "") => {
     params: {
       apiKey: API_KEY,
       query,
-      number: 12,
+      number: 24,
       addRecipeInformation: true,
     },
   });

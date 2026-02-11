@@ -11,27 +11,28 @@ const Home = () => {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-  const loadRecipes = async () => {
-    setLoading(true);
-    try {
-      const res = await fetchRecipes(query);
+   const loadRecipes = async () => {
+     setLoading(true);
+     try {
+       const res = await fetchRecipes(query);
       
-      console.log("response:", res);
+       console.log("response:", res.data);
+      
+       const data =
+         res.data.results || res.data.recipes || [];
+      
+       setRecipes(data);
+      
+     } catch (err) {
+       console.log("API Error:", err);
+       setRecipes([]);
+     }
+     setLoading(false);
+   };
+  
+   loadRecipes();
+  }    , [query]);
 
-      if (res?.data?.results) {
-        setRecipes(res.data.results);
-        setLoading(false);
-    }
-
-    } catch (err) {
-      console.log("API Error:", err);
-      setRecipes([]);
-    }
-    setLoading(false);
-  };
-
-  loadRecipes();
-}, [query]);
 
 
   return (
@@ -46,20 +47,20 @@ const Home = () => {
       />
 
      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-  {loading ? (
-    Array(6)
-      .fill(0)
-      .map((_, i) => <SkeletonCard key={i} />)
-  ) : recipes.length > 0 ? (
-    recipes.map((recipe) => (
-      <RecipeCard key={recipe.id} recipe={recipe} />
-    ))
-  ) : (
-    <p className="col-span-3 text-center text-gray-500">
-      No recipes found.
-    </p>
-  )}
-</div>
+        {loading ? (
+          Array(6)
+            .fill(0)
+            .map((_, i) => <SkeletonCard key={i} />)
+        ) : recipes.length > 0 ? (
+          recipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))
+        ) : (
+          <p className="col-span-3 text-center text-gray-500">
+            No recipes found.
+          </p>
+        )}
+    </div>
 
 
     </motion.div>
