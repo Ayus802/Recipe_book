@@ -9,7 +9,7 @@ export const fetchRecipes = async (query = "") => {
     return axios.get(`${BASE_URL}/random`, {
       params: {
         apiKey: API_KEY,
-        number: 24,
+        number: 6,
       },
     });
   }
@@ -18,7 +18,7 @@ export const fetchRecipes = async (query = "") => {
     params: {
       apiKey: API_KEY,
       query,
-      number: 24,
+      number: 6,
       addRecipeInformation: true,
     },
   });
